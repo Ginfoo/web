@@ -10,7 +10,7 @@ public class BookType {
     private int bookTypeId;
     private String bookTypeName;
     private String bookTypeIntro;
-    private Set<Book> bookTypeOwnBooks = new HashSet<Book>();
+    private Set<Book> bookTypeOwnBooks = new HashSet<>();
 
     public BookType() {
         super();

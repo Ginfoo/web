@@ -9,6 +9,7 @@
         </id>
         <property name="bookTypeName" column="bookTypeName" type="java.lang.String" length="20"/>
         <property name="bookTypeIntro" column="bookTypeIntro" type="text" length="500"/>
+        <!--图书类别下的 图书-->
         <set name="bookTypeOwnBooks" table="t_book" inverse="true">
             <key column="bookTypeId"/>
             <one-to-many class="party.infoo.entity.Book" />

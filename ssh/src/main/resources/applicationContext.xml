@@ -33,7 +33,6 @@
                 <value>classpath:*.hbm.xml</value>
                 <value>classpath:BookType.hbm.xml</value>
                 <value>classpath:Message.hbm.xml</value>
-                <value>classpath:Manager.hbm.xml</value>
             </list>
         </property>
     </bean>

@@ -12,11 +12,11 @@
         <property name="messageSendDate" column="messageSendDate" type="java.util.Date"/>
         <property name="messageIsRead" column="messageIsRead" type="java.lang.Boolean"/>
         <join table="t_userReceiveMessages" >
-            <key column="messageId"></key>
+            <key column="messageId"/>
             <many-to-one name="messageReceiveUser" column="userId"  class="party.infoo.entity.User"/>
         </join>
         <join table="t_userSendMessages" >
-            <key column="messageId"></key>
+            <key column="messageId"/>
             <many-to-one name="messageSendUser" column="userId"  class="party.infoo.entity.User"/>
         </join>
 

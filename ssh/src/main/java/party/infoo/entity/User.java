@@ -21,14 +21,14 @@ public class User {
     private Date userBirthday;
     private double userAccount;
     //好友
-    private Set<User> userFriends = new HashSet<User>();
+    private Set<User> userFriends = new HashSet<>();
     //书
-    private Set<Book> userLoveBooks = new HashSet<Book>();
-    private List<Book> userBuyBooks = new LinkedList<Book>();
-    private Set<Book> userBorrowBooks = new HashSet<Book>();
+    private Set<Book> userLoveBooks = new HashSet<>();
+    private List<Book> userBuyBooks = new LinkedList<>();
+    private Set<Book> userBorrowBooks = new HashSet<>();
     //消息
-    private List<Message> userSendMessages = new LinkedList<Message>();
-    private List<Message> userReceiveMessages = new LinkedList<Message>();
+    private List<Message> userSendMessages = new LinkedList<>();
+    private List<Message> userReceiveMessages = new LinkedList<>();
     //图片
     private Set<Image> userImages = new HashSet<Image>();
 
