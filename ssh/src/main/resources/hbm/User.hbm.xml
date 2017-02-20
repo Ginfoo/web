@@ -17,7 +17,7 @@
         <!--好友-->
         <set name="userFriends" table="t_userFriends">
             <key column="userId"/>
-            <many-to-many column="userId" class="party.infoo.entity.User"/>
+            <many-to-many column="userFriendId" class="party.infoo.entity.User"/>
         </set>
         <!--喜爱的书-->
         <set name="userLoveBooks" table="t_userLoveBooks">

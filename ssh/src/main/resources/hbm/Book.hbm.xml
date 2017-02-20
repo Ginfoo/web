@@ -8,7 +8,7 @@
             <generator class="native"/>
         </id>
         <property name="bookName" column="bookName" type="java.lang.String" length="30"/>
-        <property name="bookAuthor" column="bookName" type="java.lang.String" length="30"/>
+        <property name="bookAuthor" column="bookAuthor" type="java.lang.String" length="30"/>
         <property name="bookPublishDate" column="bookPublishDate" type="java.util.Date"/>
         <property name="bookIntro" column="bookIntro" type="text" length="500"/>
         <property name="bookCount" column="bookCount" type="java.lang.Integer"/>
