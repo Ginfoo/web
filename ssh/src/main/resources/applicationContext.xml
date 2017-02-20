@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--定义DataSource数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="user" value="${jdbc.userName}"/>
+        <property name="password" value="${jdbc.userPass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <!--数据库连接池-->
+        <property name="initialPoolSize" value="5"/>
+        <property name="minPoolSize" value="3"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="loginTimeout" value="60"/>
+        <property name="idleConnectionTestPeriod" value="120"/>
+        <property name="acquireIncrement" value="2"/>
+        <property name="acquireRetryAttempts" value="15"/>
+    </bean>
+    <!--因为是用spring整合hibernate4，所以需要用支持hibernate4的sessionFactory和transactionManager-->
+    <!--定义SessionFactory-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="mappingLocations" value="classpath:*.hbm.xml"/>
+    </bean>
+
+    <!--管理者-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--管理制度-->
+    <tx:advice id="transactionInterceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="new*" propagation="REQUIRED"/>
+            <tx:method name="set*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="change*" propagation="REQUIRED"/>
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="load*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <!--工人-->
+        <aop:pointcut id="serviceOperation" expression="execution(* party.infoo.service..*.*(..))"/>
+        <!--向工人通知管理制度-->
+        <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="serviceOperation"/>
+    </aop:config>
+    <context:component-scan base-package="party.infoo"/>
+</beans>
