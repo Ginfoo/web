@@ -1,7 +1,36 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="party.infoo.entity">
+    <class name="User" table="t_user">
+        <id name="userId" column="userId" type="java.lang.Long">
+            <generator class="native"/>
+        </id>
+        <property name="userName" column="userName" type="java.lang.String" length="20"/>
+        <property name="userPass" column="userPass" type="java.lang.String" length="20"/>
+        <property name="userSex" column="userSex" type="java.lang.Integer" length="1"/>
+        <property name="userIntro" column="userIntro" type="text" length="500"/>
+        <property name="userPic" column="userPic" type="java.sql.Blob"/>
+        <property name="userBirthday" column="userBirthday" type="java.util.Date"/>
+        <property name="userAccount"  column="userAccount" type="java.lang.Double" precision="15" scale="2"/>
+        <set name="userFriends" table="t_userFriends">
+            <key column="userId"/>
+            <one-to-many  class="party.infoo.entity.User"/>
+        </set>
+        <set name="userLoveBooks" table="t_userLoveBooks">
+            <key column="userId"/>
+            <one-to-many column="bookId" class="party.infoo.entity.Book"/>
+        </set>
+        <bag name="userBuyBooks" t_userBuyBooks>
+            <key column="userId"/>
+            <one-to-many class="party.infoo.entity.Book" />
+        </bag>
+        <set name="userBorrowBooks" table="t_userBorrowBooks">
+            <key column="userId"/>
+            <many-to-many column="bookId" class="party.infoo.entity.Book"/>
+        </set>
+
+    </class>
 
 </hibernate-mapping>
