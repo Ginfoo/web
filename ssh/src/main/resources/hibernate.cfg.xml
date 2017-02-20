@@ -9,5 +9,6 @@
     <property name="hbm2ddl.auto">update</property>
     <mapping resource="User.hbm.xml"/>
     <mapping resource="Book.hbm.xml"/>
+    <mapping resource="Image.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -1,7 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="party.infoo.entity">
+    <class name="Book" table="t_book">
+        <id name="bookId" column="bookId" type="java.lang.Long">
+            <generator class="native"/>
+        </id>
+        <property name="bookName" column="bookName" type="java.lang.String" length="30"/>
+        <property name="bookAuthor" column="bookName" type="java.lang.String" length="30"/>
+        <property name="bookPublishDate" column="bookPublishDate" type="java.util.Date"/>
+        <property name="bookIntro" column="bookIntro" type="text" length="500"/>
+        <property name="bookCount" column="bookCount" type="java.lang.Integer"/>
+        <property name="bookPrice" column="bookPrice" type="java.lang.Float" precision="4" scale="2"/>
+        <many-to-one name="bookType" column="bookTypeId" class="party.infoo.entity.BookType"/>
+        <bag name="bookBuyUsers" table="t_userBuyBooks" inverse="true">
+            <key column="bookId"/>
+            <many-to-many column="userId" class="party.infoo.entity.User"/>
+        </bag>
+        <list name="bookBorrowUsers" table="t_userBorrowBooks">
+            <key column="bookId"/>
+            <list-index column="sort" base="1"/>
+            <many-to-many column="userId" class="party.infoo.entity.User"/>
+        </list>
+        <set name="bookImages" table="t_image">
+            <key column="bookId"/>
+            <one-to-many class="party.infoo.entity.Image"/>
+        </set>
+    </class>
 
 </hibernate-mapping>

@@ -13,22 +13,53 @@
         <property name="userIntro" column="userIntro" type="text" length="500"/>
         <property name="userPic" column="userPic" type="java.sql.Blob"/>
         <property name="userBirthday" column="userBirthday" type="java.util.Date"/>
-        <property name="userAccount"  column="userAccount" type="java.lang.Double" precision="15" scale="2"/>
+        <property name="userAccount" column="userAccount" type="java.lang.Double" precision="15" scale="2"/>
+        <!--好友-->
         <set name="userFriends" table="t_userFriends">
             <key column="userId"/>
-            <one-to-many  class="party.infoo.entity.User"/>
+            <many-to-many column="userId" class="party.infoo.entity.User"/>
+            <composite-element class="party.infoo.entity.User">
+                <property name="userId" column="userId" not-null="true"/>
+            </composite-element>
         </set>
+        <!--喜爱的书-->
         <set name="userLoveBooks" table="t_userLoveBooks">
             <key column="userId"/>
-            <one-to-many column="bookId" class="party.infoo.entity.Book"/>
+            <many-to-many column="bookId" class="party.infoo.entity.Book"/>
+            <composite-element class="party.infoo.entity.Book">
+                <property name="bookName" column="bookName" not-null="true"/>
+            </composite-element>
         </set>
-        <bag name="userBuyBooks" t_userBuyBooks>
+        <!--购买的书-->
+        <bag name="userBuyBooks" table="t_userBuyBooks">
             <key column="userId"/>
-            <one-to-many class="party.infoo.entity.Book" />
+            <many-to-many class="party.infoo.entity.Book"/>
         </bag>
+        <!--借阅的书-->
         <set name="userBorrowBooks" table="t_userBorrowBooks">
             <key column="userId"/>
             <many-to-many column="bookId" class="party.infoo.entity.Book"/>
+        </set>
+        <!--接收到的消息-->
+        <list name="userReceiveMessages" table="t_userReceiveMessages">
+            <key column="userId"></key>
+            <list-index column="sort" base="1"/>
+            <composite-element class="party.infoo.entity.Message">
+                <property name="messageId" column="messageId" type="java.lang.Long"/>
+                <property name="messageText" column="messageText" type="text" length="500"/>
+            </composite-element>
+        </list>
+        <!--发送的消息-->
+        <bag name="userSendMessages" table="t_userSendMessages">
+            <key column="userId"></key>
+            <composite-element class="party.infoo.entity.Message">
+                <property name="messageId" column="messageId" type="java.lang.Long"/>
+                <property name="messageText" column="messageText" type="text" length="500"/>
+            </composite-element>
+        </bag>
+        <set name="userImages" table="t_image">
+            <key column="userId"/>
+            <one-to-many class="party.infoo.entity.Image"/>
         </set>
 
     </class>
