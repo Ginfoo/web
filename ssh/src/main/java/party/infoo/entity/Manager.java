@@ -3,7 +3,7 @@ package party.infoo.entity;
 /**
  * Created by infoo on 2017/2/21.
  */
-public class Manager extends User {
+public class Manager  {
     private int managerId;
     private String managerName;
     private String managerPass;

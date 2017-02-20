@@ -1,8 +1,6 @@
 package party.infoo.entity;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by infoo on 2017/2/20.
@@ -12,7 +10,6 @@ public class Message {
     private String messageText;
     private User messageSendUser;
     private User messageReceiveUser;
-    private Set<User> messageReceiveUsers=new HashSet<User>();
     private Date messageSendDate;
     private boolean messageIsRead;
 

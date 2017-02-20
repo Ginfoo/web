@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="party.infoo.entity">
+    <class name="BookType" table="t_bookType">
+        <id name="bookTypeId" column="bookTypeId">
+            <generator class="native" />
+        </id>
+        <property name="bookTypeName" column="bookTypeName" type="java.lang.String" length="20"/>
+        <property name="bookTypeIntro" column="bookTypeIntro" type="text" length="500"/>
+        <set name="bookTypeOwnBooks" table="t_book" inverse="true">
+            <key column="bookTypeId"/>
+            <one-to-many class="party.infoo.entity.Book" />
+        </set>
+    </class>
+
+
+</hibernate-mapping>

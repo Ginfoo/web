@@ -18,17 +18,11 @@
         <set name="userFriends" table="t_userFriends">
             <key column="userId"/>
             <many-to-many column="userId" class="party.infoo.entity.User"/>
-            <composite-element class="party.infoo.entity.User">
-                <property name="userId" column="userId" not-null="true"/>
-            </composite-element>
         </set>
         <!--喜爱的书-->
         <set name="userLoveBooks" table="t_userLoveBooks">
             <key column="userId"/>
             <many-to-many column="bookId" class="party.infoo.entity.Book"/>
-            <composite-element class="party.infoo.entity.Book">
-                <property name="bookName" column="bookName" not-null="true"/>
-            </composite-element>
         </set>
         <!--购买的书-->
         <bag name="userBuyBooks" table="t_userBuyBooks">
@@ -50,14 +44,14 @@
             </composite-element>
         </list>
         <!--发送的消息-->
-        <bag name="userSendMessages" table="t_userSendMessages">
+        <bag name="userSendMessages" table="t_userSendMessages" inverse="true">
             <key column="userId"></key>
             <composite-element class="party.infoo.entity.Message">
                 <property name="messageId" column="messageId" type="java.lang.Long"/>
                 <property name="messageText" column="messageText" type="text" length="500"/>
             </composite-element>
         </bag>
-        <set name="userImages" table="t_image">
+        <set name="userImages" table="t_image" inverse="true">
             <key column="userId"/>
             <one-to-many class="party.infoo.entity.Image"/>
         </set>
