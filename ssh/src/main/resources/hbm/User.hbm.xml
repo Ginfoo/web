@@ -15,7 +15,7 @@
         <property name="userBirthday" column="userBirthday" type="java.util.Date"/>
         <property name="userAccount" column="userAccount" type="java.lang.Double" precision="15" scale="2"/>
         <!--好友-->
-        <set name="userFriends" table="t_userFriends">
+        <set name="userFriends" table="t_userFriends" cascade="none">
             <key column="userId"/>
             <many-to-many column="userFriendId" class="party.infoo.entity.User"/>
         </set>
@@ -35,7 +35,7 @@
             <many-to-many column="bookId" class="party.infoo.entity.Book"/>
         </set>
         <!--接收到的消息-->
-        <list name="userReceiveMessages" table="t_userReceiveMessages">
+        <list name="userReceiveMessages" table="t_userReceiveMessages" cascade="all">
             <key column="userId"></key>
             <list-index column="sort" base="1"/>
             <composite-element class="party.infoo.entity.Message">
@@ -44,14 +44,14 @@
             </composite-element>
         </list>
         <!--发送的消息-->
-        <bag name="userSendMessages" table="t_userSendMessages" inverse="true">
+        <bag name="userSendMessages" table="t_userSendMessages" inverse="true" cascade="all">
             <key column="userId"></key>
             <composite-element class="party.infoo.entity.Message">
                 <property name="messageId" column="messageId" type="java.lang.Long"/>
                 <property name="messageText" column="messageText" type="text" length="500"/>
             </composite-element>
         </bag>
-        <set name="userImages" table="t_image" inverse="true">
+        <set name="userImages" table="t_image" inverse="true" cascade="all">
             <key column="userId"/>
             <one-to-many class="party.infoo.entity.Image"/>
         </set>

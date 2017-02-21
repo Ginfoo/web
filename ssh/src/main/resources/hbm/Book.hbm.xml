@@ -23,7 +23,7 @@
             <list-index column="sort" base="1"/>
             <many-to-many column="userId" class="party.infoo.entity.User"/>
         </list>
-        <set name="bookImages" table="t_image">
+        <set name="bookImages" table="t_image" cascade="all">
             <key column="bookId"/>
             <one-to-many class="party.infoo.entity.Image"/>
         </set>

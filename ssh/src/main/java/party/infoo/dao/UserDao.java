@@ -1,4 +1,4 @@
-package party.infoo.service;
+package party.infoo.dao;
 
 import party.infoo.entity.Book;
 import party.infoo.entity.Message;
@@ -10,8 +10,7 @@ import java.util.List;
 /**
  * Created by infoo on 2017/2/21.
  */
-
-public interface UserService {
+public interface UserDao {
     //用户登录
     public User loginUser(User user);
 
@@ -20,7 +19,7 @@ public interface UserService {
     public User getUser(Class<User> c, Serializable id);
 
     //修改个人信息
-    public void updateUser(User user, User newUser);
+    public void updateUser(User newUser);
 
     //好友
     public void addFriend(User user, User friend);
@@ -52,5 +51,4 @@ public interface UserService {
     public void deleteSendMessages(User user, List<Message> messages);
 
     public void readMessage(User user, Message message);
-
 }
