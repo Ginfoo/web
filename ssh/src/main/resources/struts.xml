@@ -5,10 +5,10 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
     <constant name="struts.action.extension" value="action"/>
-    <package name="infoo" namespace="/" >
+    <package name="infoo" namespace="/" extends="struts-default">
         <action name="user_login" method="login" class="userAction">
-            <result name="success">main.jsp</result>
-            <result name="error">index.jsp</result>
+            <result name="success">/main.jsp</result>
+            <result name="error">/index.jsp</result>
         </action>
     </package>
 

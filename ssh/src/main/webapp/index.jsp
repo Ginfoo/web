@@ -12,10 +12,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="user_login" method="post">
-    <input type="text" name="user.userName"><br/>
-    <input type="password" name="user.userPass"><br/>
+
+<form action="user_login.action" method="post">
+   用户名： <input type="text" name="user.userName"><br/>
+   密码： <input type="password" name="user.userPass"><br/>
     <input type="submit" value="登录"/>
+
 </form>
 </body>
 </html>

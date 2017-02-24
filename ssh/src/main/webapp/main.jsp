@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-你好：${current.userName}
+你好：${currentUser.userName}
 </body>
 </html>
